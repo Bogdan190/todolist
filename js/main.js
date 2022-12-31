@@ -40,9 +40,6 @@ function renderTasks() {
 
 }
 
-// const [a, b, c, ...z] = tasks[0].text
-const {b,c, ...rest} = {a:1,b:2,c:3,z:4}
-console.log({b,c,rest})
 
 
 
@@ -82,12 +79,18 @@ function handleSave() {
     editMode.checked = false
 }
 
-function handleAdd() {
-    const task = input.value
-    const item = buildItem(task)
+function createTask(text) {
+    return {text, done:false}
+}
 
-    list.append(item)
+
+function handleAdd() {
+    const text = input.value
+    const task = createTask(text)
+
+    tasks.push(task)
     input.value = ''
+    renderTasks()
     updateCount()
 }
 
